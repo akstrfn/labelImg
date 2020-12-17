@@ -1534,14 +1534,16 @@ class MainWindow(QMainWindow, WindowMixin):
         self.load_labels(shapes)
         self.canvas.verified = t_voc_parse_reader.verified
 
-    def load_yolo_txt_by_filename(self, txt_path):
+    def load_yolo_txt_by_filename(self, txt_path, classes_path=None):
         if self.file_path is None:
             return
         if os.path.isfile(txt_path) is False:
             return
 
+        # TODO this should check if classes.txt is present in txtPath
+        cpath = classes_path if classes_path else self.label_hist
         self.set_format(FORMAT_YOLO)
-        t_yolo_parse_reader = YoloReader(txt_path, self.image)
+        t_yolo_parse_reader = YoloReader(txt_path, self.image, cpath)
         shapes = t_yolo_parse_reader.get_shapes()
         print(shapes)
         self.load_labels(shapes)
