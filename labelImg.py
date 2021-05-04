@@ -543,7 +543,6 @@ class MainWindow(QMainWindow, WindowMixin):
             self.set_format(FORMAT_PASCALVOC)
         else:
             raise ValueError('Unknown label file format.')
-        self.set_dirty()
 
     def no_shapes(self):
         return not self.items_to_shapes
